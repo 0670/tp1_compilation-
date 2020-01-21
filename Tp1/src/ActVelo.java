@@ -193,7 +193,7 @@ public class ActVelo extends AutoVelo {
 		case -1: // action vide
 			break;
 		case 1:
-			nameClient=""+nameClient;
+		
 		
 		
 			// TODO completer les actions
