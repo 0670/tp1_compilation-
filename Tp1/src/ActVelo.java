@@ -14,23 +14,26 @@ import java.util.Scanner;
 public class ActVelo extends AutoVelo {
 
 	/** table des actions */
-	private final int[][] ACTION = { /*
+	private final int[][] ACTION = {
+			// table des actions 
+			/*
 	    * Etat        ADULTE DEBUT ENFANT   FIN   HEURES IDENT  NBENTIER  VIRG PTVIRG BARRE AUTRES
 		
 		/* 0 */     {  -1,   -1,    -1,     -1,    -1,     1,      -1,    -1,   -1,    12,    -1   },
-		/* 1 */     {  -1,    4,    -1,     -1,    -1,    -1,       2,    -1,   -1,    12,    -1   },
-		/* 2 */     {  -1,   -1,    -1,     -1,     3,    -1,      -1,    -1,   -1,    12,    -1   },
-		/* 3 */     {  -1,	  4,    -1,      5,    -1,    -1,      -1,    -1,   -1,    12,    -1   },
-		/* 4 */     {  -1,   -1,    -1,     -1,    -1,    -1,       6,    -1, 	-1,    12,    -1   }, // à verifier		
-		/* 5 */     {  -1,   -1,    -1,   	 1,    -1,    -1, 	   -1,     0,   10,    12,    -1   },
-		/* 6 */     {   7,   -1,    -1,     -1,    -1,    -1,      -1,    -1,   -1,    12,    -1   },
-		/* 7 */     {  -1,   -1,    -1,     -1,    -1,     0,       8,    -1,   10,    12,    -1   },
-		/* 8 */     {  -1,	 -1,     9,      5,    -1,    -1,      -1,    -1,   -1,    12,    -1   },
-		/* 9 */     {  -1,   -1,    -1,     -1,    -1,    -1,      -1,     0, 	10,    12,    -1   }, 
-		/* 10 */    {  -1,   -1,    -1,   	-1,    -1,    -1, 	   -1,    -1,   -1,    12,    -1   },// à verifier		
-		/* 11 */    { } // à verifier		
-		//TODO completer TRANSIT
-		/* ...		{...} */ 
+		/* 1 */     {  -1,    3,    -1,      4,    -1,    -1,       2,    -1,   -1,    -1,    -1   },
+		/* 2 */     {  -1,   -1,    -1,     -1,     3,    -1,      -1,    -1,   -1,    -1,    -1   },
+		/* 3 */     {  -1,	 -1,    -1,      4,    -1,    -1,      -1,    -1,   -1,    -1,    -1   },
+		/* 4 */     {  -1,   -1,    -1,      -1,    -1,   -1,       5,    -1, 	-1,    -1,    -1   }, 		
+		/* 5 */     {  -1,   -1,    -1,   	 1,    -1,    -1, 	   -1,     8,    7,    -1,    -1   },
+		/* 6 */     {   7,   -1,    11,     -1,    -1,    -1,      -1,    -1,   -1,    -1,    -1   },
+		/* 7 */     {  -1,   -1,    -1,     -1,    -1,     0,       6,    -1,    7,    -1,    -1   },
+		/* 8 */     {  -1,	 -1,     9,      5,    -1,    -1,      -1,    -1,   -1,    -1,    -1   },
+		/* 9 */     {  -1,   -1,    -1,     -1,    -1,    -1,      -1,     8, 	 7,    -1,    -1   }, 
+		/* 10 */    {  -1,   -1,    -1,   	-1,    -1,     9, 	   -1,    -1,   -1,    12,    -1   },		
+		/* 11 */    {  -1,   -1,    -1,   	-1,    -1,    10, 	   -1,    -1,   -1,    12,    -1   },
+		/* 12 */    {  12,   12,    12,   	12,    12,    12, 	   12,    12,   12,    12,    12   },
+		
+		// à verifier par la prof 		 
 	};
 
 	/**
@@ -146,11 +149,14 @@ public class ActVelo extends AutoVelo {
 
 	// TODO completer la declaration des variables necessaires aux actions
 	// *******************************************************************
-	// vafriable pour le bilan du jouor 
-	private int bilanjournee;
-	// affihcage du bilan du jour 
-	private  String valEXp ;
-	// 
+	// le nom du client  
+	private String nameClient;
+	//  le reste de vélos dans la journée 
+	private  int rest  ;
+	// nombre de velo enfant 
+	private int nbEnfant;
+	// nombre de velo adulte
+	private int nbAdulte;
 	 
 	
 	
@@ -167,8 +173,13 @@ public class ActVelo extends AutoVelo {
 		
 		// TODO completer l'initialisation des variables necessaires aux actions
 		// *********************************************************************
+	nameClient="";
+	rest=0;
+	nbEnfant=0;
+	nbAdulte=0;
 		
-	} // fin initialisations
+		
+	} 
 
 	/**
 	 * execution d'une action
@@ -182,7 +193,7 @@ public class ActVelo extends AutoVelo {
 		case -1: // action vide
 			break;
 		case 1:
-			 
+			nameClient=""+nameClient;
 		
 		
 			// TODO completer les actions
