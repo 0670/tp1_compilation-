@@ -23,7 +23,7 @@ public class ActVelo extends AutoVelo {
 		/* 1 */     {  -1,    3,    -1,      4,    -1,    -1,       2,    -1,   -1,    -1,    -1   },
 		/* 2 */     {  -1,   -1,    -1,     -1,     3,    -1,      -1,    -1,   -1,    -1,    -1   },
 		/* 3 */     {  -1,	 -1,    -1,      4,    -1,    -1,      -1,    -1,   -1,    -1,    -1   },
-		/* 4 */     {  -1,   -1,    -1,      -1,    -1,   -1,       5,    -1, 	-1,    -1,    -1   }, 		
+		/* 4 */     {  -1,   -1,    -1,     -1,    -1,   -1,        5,    -1, 	-1,    -1,    -1   }, 		
 		/* 5 */     {  -1,   -1,    -1,   	 1,    -1,    -1, 	   -1,     8,    7,    -1,    -1   },
 		/* 6 */     {   7,   -1,    11,     -1,    -1,    -1,      -1,    -1,   -1,    -1,    -1   },
 		/* 7 */     {  -1,   -1,    -1,     -1,    -1,     0,       6,    -1,    7,    -1,    -1   },
@@ -150,7 +150,7 @@ public class ActVelo extends AutoVelo {
 	// TODO completer la declaration des variables necessaires aux actions
 	// *******************************************************************
 	// le nom du client  
-	private String nameClient;
+	private String nomClient;
 	//  le reste de vélos dans la journée 
 	private  int rest  ;
 	// nombre de velo enfant 
@@ -158,8 +158,12 @@ public class ActVelo extends AutoVelo {
 	// nombre de velo adulte
 	private int nbAdulte;
 	 
-	
-	
+	// nb horraire;
+	private int heure;
+	private int heureDeb, heureFin;
+	private int duree;
+	private int reste_Adulte, reste_Enfant;
+	private int numId;
 	/**
 	 * initialisations a effectuer avant les actions
 	 */
@@ -173,11 +177,16 @@ public class ActVelo extends AutoVelo {
 		
 		// TODO completer l'initialisation des variables necessaires aux actions
 		// *********************************************************************
-	nameClient="";
-	rest=0;
+	nomClient="";
 	nbEnfant=0;
 	nbAdulte=0;
-		
+	heure=0;
+	heureDeb=0;
+	heureFin=0;
+	reste_Adulte=MAX_VELOS_ADULTES;
+	reste_Enfant=MAX_VELOS_ENFANT;
+	duree=0;
+	numId=0;
 		
 	} 
 
@@ -192,18 +201,95 @@ public class ActVelo extends AutoVelo {
 		switch (numAction) {
 		case -1: // action vide
 			break;
+			
 		case 1:
+			nomClient=this.analyseurLexical.chaineIdent(this.analyseurLexical.tabIdent.size()-1); 
+			break;
+		case 2:
+			heure=valEnt();
+		    break;
+			
+		case 3:
+			heureDeb=heure;
+			break;
+			
+		case 4:
+			heureFin=heure;
+				
+			duree= calculDureeLoc(jourCourant, heureDeb, jourCourant, heureFin);
+			
+			break;
+		case 5:
+			heureFin=19;
+			heure= calculDureeLoc(jourCourant, heureDeb, jourCourant,heureFin );
+			break;
 		
+		case 6:
+			nbAdulte=valEnt();
+			if(nbAdulte<reste_Adulte && !maBaseDeLoc.isPresent(nomClient)) {
+			reste_Adulte=reste_Adulte - nbAdulte;
+			}
+			else {
+				System.out.println( nomClient + "  il n'y a pas de velo adulte disponible ou il a une location en cours ");
+			}
+			
+			break;
+			
+		case 7: 
+				nbEnfant=valEnt();
+				if(nbAdulte<reste_Adulte && !maBaseDeLoc.isPresent(nomClient)) {
+				
+					reste_Enfant=reste_Enfant-nbEnfant;
+				} else {
+					
+					System.out.println(nomClient + "  il n'y pas de velo enfant diponible ou le client a une location en cours  ");
+					
+				}
+			
+				break;
+			
+		case 8: 
 		
+				maBaseDeLoc.enregistrerLoc(nomClient, jourCourant, heureDeb, nbAdulte, nbEnfant);
+			//	clientsParJour.add(jourCourant,);							
+				nbOperationCorrectes++;
+				nbOperationTotales++;
 		
-			// TODO completer les actions
-			// *******************************************************************
-
+			break;
+			
+		case 9: 
+			
+			duree = calculDureeLoc(jourCourant, heureDeb,jourCourant , heureFin);
+			maBaseDeLoc.afficherLocationsEnCours();
+			
+			break;
+			
+		case 10:
+			
+			if(!maBaseDeLoc.isPresent(nomClient)) {
+				nomClient=this.analyseurLexical.chaineIdent(numId()); 
+				
+			} else {
+				
+				System.out.println("Client " + nomClient + " à une location en cours");
+			}
+			
+			break;
+		case 11:
+			
+			if (maBaseDeLoc.isPresent(nomClient)) {
+				int duree = calculDureeLoc(jourCourant, heureDeb,12 , heureFin);// faux
+				
+				maBaseDeLoc.supprimerClient(nomClient);
+			}	
+			
+			maBaseDeLoc.afficherLocationsEnCours();
+					
 		default:
 			Lecture.attenteSurLecture("action " + numAction + " non prevue");
 		}
-	} // fin executer
-
+	}
+		
 	/**
 	 * 
 	 * utilitaire de calcul de la duree d'une location
@@ -232,5 +318,5 @@ public class ActVelo extends AutoVelo {
 		}
 		return duree;
 	}
-
+	
 }

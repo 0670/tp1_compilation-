@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class BaseDeLoc {
 	
-	/** largeur des colonnes pour affichage à l'écran */
+	/** largeur des colonnes pour affichage à l'ecran */
 	private static final int LARGEUR_COLONNE=10;
 	
 	/** 
@@ -78,6 +78,9 @@ public class BaseDeLoc {
 	public void enregistrerLoc (String nomC, int jour, int heurD, int qteA, int qteE) { 
 		InfosClient nouveauClient = new InfosClient (nomC, jour, heurD, qteA, qteE);
 		tableFiches.add(nouveauClient);
+	
+	
+	
 	}
 	
 	/**
@@ -131,13 +134,26 @@ public class BaseDeLoc {
 	/** methode d'affichage de toutes les locations de BaseDeLoc */
 	public void afficherLocationsEnCours() {
 		Ecriture.ecrireStringln("");
-		Ecriture.ecrireStringln("      CLIENT      JOUR    HEURE_DEBUT  ADULTE    ENFANT\n"
+		Ecriture.ecrireStringln("     CLIENT      JOUR    HEURE_DEBUT  ADULTE    ENFANT\n"
 				              + "---------------    ----      ---       ---       ---     ");	
 		for(InfosClient client: tableFiches) { 
 			client.afficheClient();
 		}	
 	}
 
+	public boolean isPresent( String nom) {
+		
+		for (InfosClient client : tableFiches) {
+			if(client.nomClient.equals(nom)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+
+
+	
 }
 
     

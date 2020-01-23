@@ -107,7 +107,7 @@ public class LexVelo extends Lex {
 			lireCarLu();
 		} while (Character.isLetter(carLu));
 		
-		int k;
+		int k=0;
 		switch (s) {
 		 	case "ADULTE":
 		 		k=0;
@@ -125,13 +125,14 @@ public class LexVelo extends Lex {
 		 	case "HEURES":
 				k=4;
 				break;
-			default: 
-				k=5;
-				
-		}
+		 	default: 
+		 		k=5;
+                tabIdent.add(s);
+                   
+        }
 		numIdCourant=k;
 		return  k;
-     // deuxieme methodes...
+     // deuxieme methode...
 	/*	if ( s.compareTo("ADULTE")==0) {
 			numIdCourant=0;
 			return 0;
@@ -200,7 +201,6 @@ public class LexVelo extends Lex {
 	 * @return chaine correspondant a numIdent
 	 */
 	public String chaineIdent(int numIdent) {
-
 		return this.tabIdent.get(numIdent);
 
 	}

@@ -1,4 +1,5 @@
 import java.io.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
@@ -23,7 +24,7 @@ public class AutoVelo extends Automate{
 		{
 		/* Etat      ADULTE DEBUT ENFANT   FIN   HEURES  IDENT  NBENTIER  VIRG PTVIRG  BARRE AUTRES  */
 		/* 0 */     {  -1,   -1,    -1,     -1,    -1,     1,      -1,    -1,   -1,    12,    -1   },
-		/* 1 */     {  -1,    4,    -1,     -1,    -1,    -1,       2,    -1,   -1,    12,    -1   },
+		/* 1 */     {  -1,    4,    -1,      5,    -1,    -1,       2,    -1,   -1,    12,    -1   },
 		/* 2 */     {  -1,   -1,    -1,     -1,     3,    -1,      -1,    -1,   -1,    12,    -1   },
 		/* 3 */     {  -1,	  4,    -1,      5,    -1,    -1,      -1,    -1,   -1,    12,    -1   },
 		/* 4 */     {  -1,   -1,    -1,     -1,    -1,    -1,       6,    -1, 	-1,    12,    -1   }, // à verifier		
